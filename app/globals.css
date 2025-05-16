@@ -1,0 +1,726 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.5% 48%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Simple Deposit Button with Glow Effect */
+.deposit-button {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 0 rgba(250, 181, 64, 0);
+  overflow: hidden;
+}
+
+.deposit-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.deposit-button:hover {
+  box-shadow: 0 0 15px rgba(250, 181, 64, 0.7);
+  transform: translateY(-2px);
+}
+
+.deposit-button:hover::after {
+  transform: translateX(100%);
+}
+
+.deposit-button:active {
+  transform: translateY(0);
+  box-shadow: 0 0 8px rgba(250, 181, 64, 0.5);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Game Card Styling - Updated to match screenshot */
+.game-card {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 20, 0, 0.7) 100%);
+  border: 1px solid rgba(56, 193, 44, 0.2);
+  box-shadow: 0 0 20px rgba(56, 193, 44, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.game-card:hover {
+  box-shadow: 0 0 25px rgba(56, 193, 44, 0.15);
+  border-color: rgba(56, 193, 44, 0.3);
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='rgba(56, 193, 44, 0.03)' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.game-card:hover::before {
+  opacity: 0.7;
+}
+
+/* Bet Input Styling */
+.bet-input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(56, 193, 44, 0.3);
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bet-input:focus {
+  outline: none;
+  border-color: rgba(56, 193, 44, 0.6);
+  box-shadow: 0 0 15px rgba(56, 193, 44, 0.3);
+  transform: scale(1.02);
+}
+
+.bet-input:hover:not(:focus) {
+  border-color: rgba(56, 193, 44, 0.4);
+  box-shadow: 0 0 10px rgba(56, 193, 44, 0.2);
+}
+
+/* Bet Button Styling */
+.bet-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(56, 193, 44, 0.3);
+  border-radius: 8px;
+  color: white;
+  padding: 8px 0;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.bet-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, transparent, rgba(56, 193, 44, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: -1;
+}
+
+.bet-button:hover {
+  background-color: rgba(10, 30, 10, 0.7);
+  border-color: rgba(56, 193, 44, 0.5);
+  box-shadow: 0 0 10px rgba(56, 193, 44, 0.2);
+  transform: translateY(-1px);
+}
+
+.bet-button:hover::before {
+  transform: translateX(100%);
+}
+
+.bet-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 0 5px rgba(56, 193, 44, 0.1);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Mode Button Styling */
+.mode-button {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(56, 193, 44, 0.3);
+  border-radius: 8px;
+  color: white;
+  padding: 10px 0;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mode-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(56, 193, 44, 0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.mode-button:hover {
+  background-color: rgba(10, 30, 10, 0.7);
+  border-color: rgba(56, 193, 44, 0.5);
+}
+
+.mode-button:hover::after {
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+.mode-button-active {
+  background-color: #065f20;
+  border-color: rgba(56, 193, 44, 0.8);
+  box-shadow: 0 0 15px rgba(56, 193, 44, 0.3);
+  transform: translateY(-1px);
+}
+
+.mode-button-active::after {
+  opacity: 0.5;
+  transform: scale(1);
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+}
+
+.mode-button:active:not(.mode-button-active) {
+  transform: translateY(1px);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Play Button Styles */
+.play-button {
+  background-color: #38c12c;
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1));
+  border: 1px solid rgba(56, 193, 44, 0.5);
+  box-shadow: 0 4px 0 #2a9421, inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  width: 100%;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  text-align: center;
+  will-change: transform, box-shadow;
+}
+
+/* Cancel Button - Fully Red */
+.cancel-button {
+  background-color: #dc2626 !important; /* Bright red */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1)) !important;
+  box-shadow: 0 4px 0 #991b1b !important; /* Darker red shadow */
+  border: 1px solid rgba(220, 38, 38, 0.5) !important;
+  color: white !important;
+}
+
+.cancel-button:hover {
+  background-color: #ef4444 !important; /* Lighter red on hover */
+  box-shadow: 0 6px 0 #991b1b !important;
+  filter: brightness(1.1);
+}
+
+.cancel-button:active {
+  background-color: #b91c1c !important; /* Darker red when active */
+  box-shadow: 0 2px 0 #7f1d1d !important;
+  transform: translateY(4px);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cash Out Button - Fully Orange */
+.cashout-button {
+  background-color: #fab540 !important; /* Bright orange */
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.1)) !important;
+  box-shadow: 0 4px 0 #d97706 !important; /* Darker orange shadow */
+  border: 1px solid rgba(250, 181, 64, 0.5) !important;
+  color: white !important;
+  animation: pulse-subtle 1.5s ease-in-out infinite;
+}
+
+.cashout-button:hover {
+  background-color: #ffc060 !important; /* Lighter orange on hover */
+  box-shadow: 0 6px 0 #d97706 !important;
+  filter: brightness(1.1);
+}
+
+.cashout-button:active {
+  background-color: #e9a530 !important; /* Darker orange when active */
+  box-shadow: 0 2px 0 #b45309 !important;
+  transform: translateY(4px);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Red button shadow for cancel state */
+.box-shadow-red {
+  box-shadow: 0 4px 0 #b91c1c !important;
+}
+
+/* Orange button shadow for cash out state */
+.box-shadow-orange {
+  box-shadow: 0 4px 0 #d97706 !important;
+}
+
+/* Green button shadow for play state */
+.box-shadow-green {
+  box-shadow: 0 4px 0 #2a9421 !important;
+}
+
+/* Pressed shadow state */
+.shadow-pressed {
+  box-shadow: 0 2px 0 currentColor !important;
+  transform: translateY(2px);
+}
+
+.play-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transition: left 0.7s ease;
+  z-index: 1;
+}
+
+.play-button:hover::before {
+  left: 100%;
+}
+
+.play-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 0;
+}
+
+.play-button:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+}
+
+.play-button:hover::after {
+  opacity: 1;
+}
+
+/* Override hover shadow for red button */
+.box-shadow-red:hover {
+  box-shadow: 0 6px 0 #b91c1c !important;
+}
+
+/* Override hover shadow for orange button */
+.box-shadow-orange:hover {
+  box-shadow: 0 6px 0 #d97706 !important;
+}
+
+/* Override hover shadow for green button */
+.box-shadow-green:hover {
+  box-shadow: 0 6px 0 #2a9421 !important;
+}
+
+.play-button:active {
+  transform: translateY(4px);
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Override active shadow for red button */
+.box-shadow-red:active {
+  box-shadow: 0 2px 0 #b91c1c !important;
+}
+
+/* Override active shadow for orange button */
+.box-shadow-orange:active {
+  box-shadow: 0 2px 0 #d97706 !important;
+}
+
+/* Override active shadow for green button */
+.box-shadow-green:active {
+  box-shadow: 0 2px 0 #2a9421 !important;
+}
+
+.play-button-content {
+  padding: 12px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.2s ease;
+}
+
+.play-button:active .play-button-content {
+  transform: scale(0.98);
+}
+
+.play-text {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+}
+
+.amount-text {
+  font-size: 2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.next-round-text {
+  width: 100%;
+  text-align: center;
+  font-size: 0.875rem;
+  opacity: 0.9;
+  margin-top: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Leaf Animation Styles */
+@keyframes sway-1 {
+  0% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(2deg) translateX(3px);
+  }
+  50% {
+    transform: rotate(0deg) translateX(0);
+  }
+  75% {
+    transform: rotate(-2deg) translateX(-3px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+}
+
+@keyframes sway-2 {
+  0% {
+    transform: rotate(0deg) translateX(0);
+  }
+  25% {
+    transform: rotate(-3deg) translateX(-2px);
+  }
+  50% {
+    transform: rotate(0deg) translateX(0);
+  }
+  75% {
+    transform: rotate(3deg) translateX(2px);
+  }
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+}
+
+@keyframes sway-3 {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+  25% {
+    transform: rotate(1deg) translateY(2px);
+  }
+  50% {
+    transform: rotate(0deg) translateY(0);
+  }
+  75% {
+    transform: rotate(-1deg) translateY(-2px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+}
+
+@keyframes sway-4 {
+  0% {
+    transform: rotate(0deg) translateY(0) translateX(0);
+  }
+  25% {
+    transform: rotate(-2deg) translateY(-1px) translateX(2px);
+  }
+  50% {
+    transform: rotate(0deg) translateY(0) translateX(0);
+  }
+  75% {
+    transform: rotate(2deg) translateY(1px) translateX(-2px);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0) translateX(0);
+  }
+}
+
+.leaf-animation-1 {
+  animation: sway-1 4s ease-in-out infinite;
+}
+
+.leaf-animation-2 {
+  animation: sway-2 5s ease-in-out infinite;
+}
+
+.leaf-animation-3 {
+  animation: sway-3 6s ease-in-out infinite;
+}
+
+.leaf-animation-4 {
+  animation: sway-4 7s ease-in-out infinite;
+}
+
+/* Beehive Swing Animation */
+.beehive-swing-container {
+  position: relative;
+  height: 300px;
+  width: 260px; /* 30% larger */
+  transform-origin: top center;
+}
+
+.beehive-swing {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform-origin: top center;
+  animation: swing 5s ease-in-out infinite;
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(2deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Glassmorphism Effect */
+.glassmorphism {
+  background: rgba(10, 16, 1, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(101, 132, 44, 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glassmorphism:hover {
+  border-color: rgba(101, 132, 44, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow Effect Animation */
+@keyframes glow-pulse {
+  0% {
+    transform: translate(-5%, -5%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(5%, 5%) scale(1.1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(-5%, -5%) scale(1);
+    opacity: 0.5;
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+/* Subtle pulse animation for the play button during active bet */
+@keyframes pulse-subtle {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 1.5s ease-in-out infinite;
+}
+
+/* Sound wave animation */
+.sound-wave {
+  display: flex;
+  align-items: flex-end;
+}
+
+.sound-bar {
+  animation: sound-wave-animation 0.8s infinite ease-in-out alternate;
+}
+
+@keyframes sound-wave-animation {
+  0% {
+    height: 8px;
+  }
+  100% {
+    height: 24px;
+  }
+}
+
+/* Sound toggle button pulse when sound is on */
+.sound-enabled {
+  animation: sound-pulse 2s infinite;
+}
+
+@keyframes sound-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(250, 181, 64, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(250, 181, 64, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(250, 181, 64, 0);
+  }
+}
+
+/* Music indicator animation */
+@keyframes music-note-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+.music-icon {
+  animation: music-note-bounce 1.2s ease-in-out infinite;
+}
+
+/* Notification fade-in animation */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
+/* Betting Panel Tabs */
+.betting-panel-tabs {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(56, 193, 44, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.betting-panel-tabs:hover {
+  border-color: rgba(56, 193, 44, 0.4);
+  box-shadow: 0 0 10px rgba(56, 193, 44, 0.1);
+}
+
+/* Update the stats cards in bet history */
+.bg-\[\#0a1001\]\/80 {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(56, 193, 44, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bg-\[\#0a1001\]\/80:hover {
+  border-color: rgba(56, 193, 44, 0.4);
+  box-shadow: 0 0 10px rgba(56, 193, 44, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Tab transitions */
+[data-state="active"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-state="inactive"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
